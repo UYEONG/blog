@@ -30,7 +30,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="http://blog.coderifleman.com/images/react-hooks-and-humble-object-pattern-and-tests/hooks.00.jpg">
 <meta property="article:published_time" content="2021-04-20T15:00:00.000Z">
-<meta property="article:modified_time" content="2021-04-21T05:26:38.847Z">
+<meta property="article:modified_time" content="2021-04-21T06:42:45.395Z">
 <meta property="article:author" content="Coderifleman">
 <meta property="article:tag" content="JavaScript">
 <meta property="article:tag" content="React">
@@ -278,7 +278,7 @@
 <p>Clean Architecture, 로버트 C. 마틴 저 / 송준이 역 | 인사이트(insight) 출판</p>
 </blockquote>
 <p>뷰 그러니까 리액트 컴포넌트는 험블 객체다. 테스트하기 어렵고 불편하다. 이곳에 중요한 로직을 두면 자연스럽게 그 로직도 테스트하기 어려워진다. 중요한 로직은 컴포넌트에서 분리하고 테스트하기 쉬운 곳에 두어야 한다. 그럼 테스트하기 쉬운 공간이 어딜까?</p>
-<h2 id="건강한-개발-루틴"><a href="#건강한-개발-루틴" class="headerlink" title="건강한 개발 루틴"></a>건강한 개발 루틴</h2><p>그 공간을 이야기에 앞서 건강한 개발 루틴을 이야기해보자. 필자가 말하는 건강한 개발 루틴이란 개발의 순서가 일정하며 그 과정에 생산된 코드가 충분히 검증될 수 있는 순서와 방법을 말한다. 항상 건강한 개발 루틴을 잃지 않도록 고민하고 적합한 접근법을 찾아야 한다.</p>
+<h2 id="건강한-개발-루틴"><a href="#건강한-개발-루틴" class="headerlink" title="건강한 개발 루틴"></a>건강한 개발 루틴</h2><p>그 공간을 이야기에 앞서 건강한 개발 루틴을 이야기해보자. 필자가 말하는 건강한 개발 루틴이란 개발의 순서가 일정하며 그 과정에 생산된 코드가 충분히 검증될 수 있는 순서와 방법을 말한다. </p>
 <ol>
 <li>요구사항을 분석하고 모델을 정리한다.</li>
 <li>모델을 토대로 데이터를 실체화하고 비즈니스 로직을 작성한다.</li>
@@ -320,12 +320,12 @@
   <span class="token function">expect</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>current<span class="token punctuation">.</span>offboardingDate<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBeUndefined</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 
-<p>훅스를 테스트하는데 <code>@testing-library/react-hooks</code>의 <code>renderHook</code>과 <code>act</code>를 사용하고 있다. 해당 라이브러리가 훅스를 한층 더 테스트하기 쉽도록 한다.</p>
+<p>훅스 테스트에 <code>@testing-library/react-hooks</code>의 <code>renderHook</code>과 <code>act</code>를 사용하고 있다. 해당 라이브러리가 훅스를 한층 더 테스트하기 쉽도록 한다.</p>
 <p><code>useBaiscFormData</code>로 데이터를 생성하고 <code>act</code>를 이용해 근무상태를 변경한다. 변경 후 <code>offboardingDate</code>가 <code>undefined</code>으로 변경됐는지 확인하여 정책을 검증한다.</p>
 <p>훅스 테스트는 컴포넌트보다 상대적으로 쉽고 단순하다. 이곳에 데이터와 비즈니스 로직을 두는 것으로 험블 객체 패턴을 실현하고 패턴의 장점을 취할 수 있다. </p>
 <h2 id="끝으로"><a href="#끝으로" class="headerlink" title="끝으로"></a>끝으로</h2><p>리액트 v16.8에 훅스가 추가되고 벌써 2년이 지났다. 커뮤니티는 Redux 기반 리액트 애플리케이션에서 훅스와 컨텍스트를 활용하는 방식으로 전환하고 있다. 필자는 Redux 기반 애플리케이션에서 데이터와 비즈니스 로직을 액션에 작성하고 테스트했다. 액션 생성자라는 단순한 함수 정의에서 벗어나면 뷰 외의 다양한 로직을 테스트하기에 좋은 공간이 된다.</p>
 <p>하지만 훅스와 컨텍스트 기반으로 넘어오면서 건강한 개발 루틴을 잠시 잃었다. 필자는 훅스를 단순하게 해석했고 때문에 비즈니스 로직을 둘 적당한 장소가 없어 자연스럽게 컴포넌트부터 시작했는데 이때부터 혼란이 찾아왔다.</p>
-<p>현재는 애플리케이션 규모에 따라 훅스를 여러 가지 용도로 정의하고 활용한다. 훅스를 단순히 뷰만을 위한 것이라는 해석이 아니라 뷰보다 저수준의 다른 계층으로 활용하면 개발 간 만나는 많은 문제를 해결할 수 있다.</p>
+<p>현재는 애플리케이션 규모에 따라 훅스를 여러 가지 용도로 정의하고 활용한다. 훅스를 뷰만을 위한 단순한 기능이 아니라 뷰보다 저수준인 다른 계층으로써 활용하면 개발 간 만나는 많은 문제를 해결할 수 있다.</p>
 <p>이해를 돕기 위해 할 일 관리 애플리케이션을 작성했다. 관심 있는 분은 참고하길 바란다. 해당 예제는 요구사항 규모에 맞춰 작성했으므로 구현 형태, 디렉터리 구조 등이 다른 애플리케이션에는 잘 어울리지 않을 수 있다는 점을 인지해주길 바란다.</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/uyeong/todomvc-with-hooks">uyeong/todomvc-with-hooks</a></li>
